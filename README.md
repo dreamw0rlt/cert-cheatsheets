@@ -1,5 +1,9 @@
 # Certification Cheatsheets
 
+## Dorksmith
+
+Open `index.html` in a browser to use the local advanced Google search builder. It combines scoped search operators into copyable queries for authorized security research; no query data is stored by the application.
+
 ## Hi and welcome (:
 
 In this repository, I have uploaded the cheatsheets that I made before the day of the actual exam. These cheatsheet are immensely helpful as I don't have to search through my notes. If you are searching for a particular cheatsheet, you might look into this catalog and grab yourself a copy of it. Good luck for your exam!

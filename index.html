@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Stel doelgerichte Google-zoekopdrachten samen voor geautoriseerd securityonderzoek." />
+    <title>Dorksmith — Advanced Search Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Dorksmith home">
+        <span class="brand-mark" aria-hidden="true">D:</span>
+        <span>DORKSMITH</span>
+      </a>
+      <div class="topbar-actions">
+        <span class="status"><i></i> LOCAL ONLY</span>
+        <a class="icon-button" href="https://ahrefs.com/blog/google-advanced-search-operators/" target="_blank" rel="noreferrer" aria-label="Open documentatie">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7m0-7-9 9M10 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow"><span>01</span> ADVANCED SEARCH BUILDER</div>
+        <h1>Vind wat anderen<br /><em>over het hoofd zien.</em></h1>
+        <p>Combineer slimme zoekoperatoren tot krachtige queries voor jouw volgende security assessment.</p>
+      </section>
+
+      <section class="workspace" aria-label="Query builder">
+        <div class="builder-panel">
+          <div class="panel-heading">
+            <div><span class="step">01</span><h2>Bouw je query</h2></div>
+            <button class="text-button" id="resetButton" type="button">↻ RESET</button>
+          </div>
+
+          <div class="field full">
+            <label for="target">TARGET / DOMEIN <span>VEREIST</span></label>
+            <div class="input-shell target-input">
+              <span>site:</span><input id="target" autocomplete="off" placeholder="example.com" spellcheck="false" />
+            </div>
+            <small>Gebruik alleen domeinen waarvoor je expliciete toestemming hebt.</small>
+          </div>
+
+          <div class="field-grid">
+            <div class="field">
+              <label for="keywords">ZOEKTERMEN</label>
+              <input id="keywords" placeholder="bijv. admin portal" />
+            </div>
+            <div class="field">
+              <label for="exclude">UITSLUITEN</label>
+              <input id="exclude" placeholder="bijv. docs, support" />
+            </div>
+          </div>
+
+          <div class="field full">
+            <label>BESTANDSTYPE</label>
+            <div class="chips" id="filetypes">
+              <button type="button" data-value="pdf">PDF</button><button type="button" data-value="docx">DOCX</button>
+              <button type="button" data-value="xlsx">XLSX</button><button type="button" data-value="txt">TXT</button>
+              <button type="button" data-value="log">LOG</button><button type="button" data-value="conf">CONF</button>
+              <button type="button" data-value="sql">SQL</button><button type="button" data-value="env">ENV</button>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label>WAAR MOET DE TERM STAAN?</label>
+            <div class="segmented" id="locationOptions">
+              <button class="active" type="button" data-value="">Overal</button>
+              <button type="button" data-value="intitle">In titel</button>
+              <button type="button" data-value="inurl">In URL</button>
+              <button type="button" data-value="intext">In tekst</button>
+            </div>
+          </div>
+
+          <div class="field-grid compact">
+            <label class="toggle-row"><span><b>Exacte woordgroep</b><small>Zet zoektermen tussen aanhalingstekens</small></span><input id="exact" type="checkbox" /><i></i></label>
+            <label class="toggle-row"><span><b>Vergelijkbare sites</b><small>Gebruik de related: operator</small></span><input id="related" type="checkbox" /><i></i></label>
+          </div>
+        </div>
+
+        <aside class="output-panel">
+          <div class="panel-heading dark"><div><span class="step">02</span><h2>Jouw query</h2></div><span class="ready">● READY</span></div>
+          <div class="query-box">
+            <span class="query-label">GOOGLE SEARCH QUERY</span>
+            <code id="queryOutput">site:<mark>example.com</mark> "admin portal"</code>
+            <button id="copyButton" class="copy" type="button" aria-label="Kopieer query">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>
+            </button>
+          </div>
+          <button id="searchButton" class="primary" type="button">OPEN IN GOOGLE <span>↗</span></button>
+
+          <div class="idea-block">
+            <div class="idea-heading"><span>CREATIVE STARTERS</span><button id="shuffleButton" type="button">↝ SHUFFLE</button></div>
+            <div id="starterList" class="starter-list"></div>
+          </div>
+
+          <div class="notice">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2.8 20h18.4L12 3Z"/><path d="M12 9v4m0 3h.01"/></svg>
+            <p><b>WERK ETHISCH.</b><br />Zoek uitsluitend binnen afgesproken scope. Deze tool verstuurt of bewaart zelf geen gegevens.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="operator-strip" aria-label="Populaire operatoren">
+        <span>POPULAIRE OPERATOREN</span><code>site:</code><code>filetype:</code><code>intitle:</code><code>inurl:</code><code>intext:</code><code>related:</code><code>-exclude</code><code>"exact"</code>
+      </section>
+    </main>
+    <footer><span>DORKSMITH // BUILD 01</span><span>MADE FOR CURIOUS MINDS, USED WITH PERMISSION.</span></footer>
+    <div class="toast" id="toast" role="status">QUERY GEKOPIEERD</div>
+    <script src="script.js"></script>
+  </body>
+</html>
